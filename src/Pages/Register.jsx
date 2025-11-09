@@ -31,7 +31,7 @@ const Register = () => {
         photoURL: photo || "https://via.placeholder.com/40",
       });
 
-      // ✅ Log out immediately after registration
+      
       await logOut();
 
       toast.success("Registration Successful! Please login now.");
