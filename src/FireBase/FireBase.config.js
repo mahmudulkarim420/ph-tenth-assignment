@@ -1,12 +1,16 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+  apiKey: "AIzaSyCmHWsFrQTBzertUezqgrFthQdYGTMgufs",
+  authDomain: "ph-tenth-assignment-7c08c.firebaseapp.com",
+  projectId: "ph-tenth-assignment-7c08c",
+  storageBucket: "ph-tenth-assignment-7c08c.appspot.com",
+  messagingSenderId: "692955562773",
+  appId: "1:692955562773:web:78843ceeb733ead6709f1c"
 };
 
-export const app = initializeApp(firebaseConfig);
+// ✅ Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// ✅ Named export
+export { app };
