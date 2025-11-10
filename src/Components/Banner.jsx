@@ -36,7 +36,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="w-full bg-gradient-to-r from-[#1A2A6C] via-[#B21F1F] to-[#FDBB2D] py-16">
+    <div className="w-full py-16">
 
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-10">
         {/* LEFT TEXT */}
