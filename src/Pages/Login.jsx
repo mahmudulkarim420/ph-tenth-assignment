@@ -3,11 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../Providers/AuthProvider';
 import toast from 'react-hot-toast';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
   const { signIn, signInWithGoogle } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -34,7 +36,9 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#1A2A6C] via-[#B21F1F] to-[#FDBB2D] p-6">
       <div className="w-full max-w-md bg-white/10 backdrop-blur-xl rounded-2xl p-8 shadow-2xl text-white">
-        <h2 className="text-3xl font-semibold text-center mb-6">Login to BooksHaven</h2>
+        <h2 className="text-3xl font-semibold text-center mb-6">
+          Login to BooksHaven
+        </h2>
         <form onSubmit={handleLogin} className="space-y-4">
           <input
             type="email"
@@ -43,14 +47,25 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-3 rounded-lg bg-white/20 focus:bg-white/30 outline-none"
           />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 rounded-lg bg-white/20 focus:bg-white/30 outline-none"
-            autoComplete="current-password"
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-3 rounded-lg bg-white/20 focus:bg-white/30 outline-none"
+              required
+              autoComplete="current-password"
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-white text-xl"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
           <p className="text-sm mt-1 opacity-80">Forget Password?</p>
           <button
             type="submit"
@@ -67,7 +82,10 @@ const Login = () => {
           <FcGoogle className="text-2xl" /> Continue with Google
         </button>
         <p className="text-center mt-4">
-          Don't have an account? <Link to="/register" className="underline">Register</Link>
+          Don't have an account?{' '}
+          <Link to="/register" className="underline">
+            Register
+          </Link>
         </p>
       </div>
     </div>
