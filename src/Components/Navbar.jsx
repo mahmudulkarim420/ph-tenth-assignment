@@ -29,9 +29,9 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-8 text-lg font-medium">
           <li><Link to="/" className="hover:text-yellow-300 duration-200 hover:underline">Home</Link></li>
-          <li><Link to="/books" className="hover:text-yellow-300 duration-200 hover:underline">Books</Link></li>
+          <li><Link to="/all-books" className="hover:text-yellow-300 duration-200 hover:underline">All Books</Link></li>
           <li><Link to="/add-book" className="hover:text-yellow-300 duration-200 hover:underline">Add Book</Link></li>
-          <li><Link to="/about" className="hover:text-yellow-300 duration-200 hover:underline">About</Link></li>
+          <li><Link to="/my-books" className="hover:text-yellow-300 duration-200 hover:underline">My Books</Link></li>
         </ul>
 
         {/* Desktop Auth/Profile */}

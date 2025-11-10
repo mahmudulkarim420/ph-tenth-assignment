@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddBooks = () => {
+const AddBook = () => {
   return (
     <div>
       Add Books
@@ -8,4 +8,4 @@ const AddBooks = () => {
   );
 };
 
-export default AddBooks;
+export default AddBook;
