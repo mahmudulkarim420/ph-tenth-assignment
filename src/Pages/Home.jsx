@@ -6,22 +6,50 @@ import Categories from '../Components/Categories';
 import WhyUs from '../Components/WhyUs';
 import Testimonials from '../Components/Testimonials';
 import Newsletter from '../Components/Newsletter';
+import toast from 'react-hot-toast';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/books')
-      .then(res => setBooks(res.data))
-      .catch(err => console.error(err));
+    axios
+      .get('http://localhost:3000/books')
+      .then((res) => setBooks(res.data))
+      .catch((err) => console.error(err));
   }, []);
 
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Delete this book?");
-    if (!confirmDelete) return;
-
-    await axios.delete(`http://localhost:3000/books/${id}`);
-    setBooks(books.filter(book => book._id !== id));
+  const handleDelete = (id) => {
+    toast(
+      (t) => (
+        <div className="flex flex-col gap-2">
+          <span>Are you sure you want to delete this book?</span>
+          <div className="flex justify-end gap-2">
+            <button
+              className="px-3 py-1 bg-gray-400 rounded"
+              onClick={() => toast.dismiss(t.id)}
+            >
+              Cancel
+            </button>
+            <button
+              className="px-3 py-1 bg-red-600 text-white rounded"
+              onClick={async () => {
+                try {
+                  await axios.delete(`http://localhost:3000/books/${id}`);
+                  setBooks((prev) => prev.filter((b) => b._id !== id));
+                  toast.success('Book deleted successfully!');
+                } catch {
+                  toast.error('Failed to delete book!');
+                }
+                toast.dismiss(t.id);
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      ),
+      { duration: Infinity } // stay until user click
+    );
   };
 
   return (
@@ -37,23 +65,39 @@ const Home = () => {
         </Link>
       </div>
 
-      <h2 className="text-center mt-8 text-3xl font-bold text-white">Our Books</h2>
+      <h2 className="text-center mt-8 text-3xl font-bold text-white">
+        Our Books
+      </h2>
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-        {books.slice(0, 6).map(book => (
-          <div key={book._id} className="bg-white rounded-lg shadow-lg p-4 hover:scale-105 transition">
-            
-            <img src={book.coverImage} alt={book.title} className="w-full h-64 object-cover rounded-md" />
+        {books.slice(0, 6).map((book) => (
+          <div
+            key={book._id}
+            className="bg-white rounded-lg shadow-lg p-4 hover:scale-105 transition"
+          >
+            <img
+              src={book.coverImage}
+              alt={book.title}
+              className="w-full h-64 object-cover rounded-md"
+            />
 
             <h3 className="text-lg font-semibold mt-2">{book.title}</h3>
-            <p className="text-sm text-gray-600"><strong>Author:</strong> {book.author}</p>
-            <p className="text-sm text-gray-600"><strong>Genre:</strong> {book.genre}</p>
-            <p className="text-sm text-yellow-500"><strong>Rating:</strong> {book.rating}/5</p>
+            <p className="text-sm text-gray-600">
+              <strong>Author:</strong> {book.author}
+            </p>
+            <p className="text-sm text-gray-600">
+              <strong>Genre:</strong> {book.genre}
+            </p>
+            <p className="text-sm text-yellow-500">
+              <strong>Rating:</strong> {book.rating}/5
+            </p>
             <p className="text-sm mt-1">{book.summary}</p>
 
             <div className="flex justify-between mt-4">
               <Link to={`/update-book/${book._id}`}>
-                <button className="px-3 py-1 bg-blue-600 text-white rounded">Update</button>
+                <button className="px-3 py-1 bg-blue-600 text-white rounded">
+                  Update
+                </button>
               </Link>
 
               <button
@@ -63,14 +107,13 @@ const Home = () => {
                 Delete
               </button>
             </div>
-
           </div>
         ))}
       </div>
       <Categories />
       <WhyUs />
-      <Testimonials/>
-      <Newsletter/>
+      <Testimonials />
+      <Newsletter />
     </div>
   );
 };
