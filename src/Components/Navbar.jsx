@@ -90,9 +90,9 @@ const Navbar = () => {
         <div className="md:hidden bg-black/50 backdrop-blur-sm p-4 shadow-md shadow-black/40">
           <ul className="flex flex-col gap-4 text-lg">
             <Link to="/" onClick={() => setOpen(false)} className={navLinkClass('/')}>Home</Link>
-            <Link to="/all-books" onClick={() => setOpen(false)} className={navLinkClass('/all-books')}>Books</Link>
+            <Link to="/all-books" onClick={() => setOpen(false)} className={navLinkClass('/all-books')}>All Books</Link>
             <Link to="/add-book" onClick={() => setOpen(false)} className={navLinkClass('/add-book')}>Add Book</Link>
-            <Link to="/about" onClick={() => setOpen(false)} className={navLinkClass('/about')}>About</Link>
+            <Link to="/my-books" onClick={() => setOpen(false)} className={navLinkClass('/my-books')}>My Books</Link>
           </ul>
 
           <div className="flex flex-col gap-3 mt-4">
