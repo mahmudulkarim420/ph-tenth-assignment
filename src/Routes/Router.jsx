@@ -6,6 +6,9 @@ import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import Error404 from '../Pages/Error404'; // Import your 404 page
 import AllBooks from '../Pages/AllBooks';
+import PrivateRoute from './PrivateRoute';
+import AddBook from '../Pages/AddBook';
+import MyBooks from '../Pages/MyBooks';
 
 const Router = createBrowserRouter([
   {
@@ -26,7 +29,24 @@ const Router = createBrowserRouter([
       },
       {
         path: "all-books",
-        element: <AllBooks/>
+        element: 
+        <PrivateRoute>
+          <AllBooks/>
+        </PrivateRoute>
+      },
+      {
+        path: "add-book",
+        element: 
+        <PrivateRoute>
+          <AddBook/>
+        </PrivateRoute>
+      },
+      {
+        path: "my-books",
+        element: 
+        <PrivateRoute>
+          <MyBooks/>
+        </PrivateRoute>
       },
       {
         path: "*",       
