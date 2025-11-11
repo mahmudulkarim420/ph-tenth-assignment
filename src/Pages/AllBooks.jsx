@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Spinner from "../Components/Spinner";
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
@@ -20,7 +21,7 @@ const AllBooks = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-center mt-10 text-white">Loading...</div>;
+    return <Spinner />;
   }
 
   return (
@@ -29,7 +30,7 @@ const AllBooks = () => {
         All Books
       </h2>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mb-10">
         <table className="min-w-full bg-white/10 backdrop-blur-lg text-white rounded-lg">
           <thead>
             <tr className="border-b border-white/30">

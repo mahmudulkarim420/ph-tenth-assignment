@@ -11,6 +11,7 @@ import AddBook from '../Pages/AddBook';
 import MyBooks from '../Pages/MyBooks';
 import Profile from '../Pages/Profile';
 import EditProfile from '../Pages/EditProfile';
+import BookDetails from '../Pages/BookDetails';
 
 const Router = createBrowserRouter([
   {
@@ -61,6 +62,13 @@ const Router = createBrowserRouter([
         element: 
         <PrivateRoute>
           <EditProfile/>
+        </PrivateRoute>
+      },
+      {
+        path: "book/:id",
+        element: 
+        <PrivateRoute>
+          <BookDetails/>
         </PrivateRoute>
       },
       {

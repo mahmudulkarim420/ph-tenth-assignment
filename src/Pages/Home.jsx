@@ -6,7 +6,6 @@ import Categories from '../Components/Categories';
 import WhyUs from '../Components/WhyUs';
 import Testimonials from '../Components/Testimonials';
 import Newsletter from '../Components/Newsletter';
-import toast from 'react-hot-toast';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -18,52 +17,9 @@ const Home = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  const handleDelete = (id) => {
-    toast(
-      (t) => (
-        <div className="flex flex-col gap-2">
-          <span>Are you sure you want to delete this book?</span>
-          <div className="flex justify-end gap-2">
-            <button
-              className="px-3 py-1 bg-gray-400 rounded"
-              onClick={() => toast.dismiss(t.id)}
-            >
-              Cancel
-            </button>
-            <button
-              className="px-3 py-1 bg-red-600 text-white rounded"
-              onClick={async () => {
-                try {
-                  await axios.delete(`http://localhost:3000/books/${id}`);
-                  setBooks((prev) => prev.filter((b) => b._id !== id));
-                  toast.success('Book deleted successfully!');
-                } catch {
-                  toast.error('Failed to delete book!');
-                }
-                toast.dismiss(t.id);
-              }}
-            >
-              Delete
-            </button>
-          </div>
-        </div>
-      ),
-      { duration: Infinity } // stay until user click
-    );
-  };
-
   return (
     <div>
       <Banner />
-
-      {/* ✅ Add New Book Button */}
-      <div className="text-center mt-6">
-        <Link to="/add-book">
-          <button className="px-6 py-2 bg-green-600 text-white rounded-lg shadow">
-            + Add New Book
-          </button>
-        </Link>
-      </div>
 
       <h2 className="text-center mt-8 text-3xl font-bold text-white">
         Our Books
@@ -92,24 +48,18 @@ const Home = () => {
               <strong>Rating:</strong> {book.rating}/5
             </p>
             <p className="text-sm mt-1">{book.summary}</p>
-
-            <div className="flex justify-between mt-4">
-              <Link to={`/update-book/${book._id}`}>
-                <button className="px-3 py-1 bg-blue-600 text-white rounded">
-                  Update
-                </button>
-              </Link>
-
-              <button
-                onClick={() => handleDelete(book._id)}
-                className="px-3 py-1 bg-red-600 text-white rounded"
-              >
-                Delete
-              </button>
-            </div>
           </div>
         ))}
       </div>
+
+      <div className="text-center mt-6">
+        <Link to="/all-books">
+          <button className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
+            Read More Books
+          </button>
+        </Link>
+      </div>
+
       <Categories />
       <WhyUs />
       <Testimonials />
