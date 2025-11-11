@@ -8,7 +8,7 @@ const AllBooks = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/books") // backend endpoint
+      .get("http://localhost:3000/books")
       .then((res) => {
         setBooks(res.data);
         setLoading(false);
@@ -35,9 +35,9 @@ const AllBooks = () => {
             <tr className="border-b border-white/30">
               <th className="px-4 py-2 text-left">#</th>
               <th className="px-4 py-2 text-left">Title</th>
-              <th className="px-4 py-2 text-left">Author</th>
-              <th className="px-4 py-2 text-left">Genre</th>
-              <th className="px-4 py-2 text-left">Rating</th>
+              <th className="px-4 py-2 text-left hidden sm:table-cell">Author</th>
+              <th className="px-4 py-2 text-left hidden md:table-cell">Genre</th>
+              <th className="px-4 py-2 text-left hidden lg:table-cell">Rating</th>
               <th className="px-4 py-2 text-left">Action</th>
             </tr>
           </thead>
@@ -45,7 +45,7 @@ const AllBooks = () => {
             {books.map((book, index) => (
               <tr key={book._id} className="hover:bg-white/20 transition">
                 <td className="px-4 py-2">{index + 1}</td>
-                
+
                 {/* Title + Image */}
                 <td className="px-4 py-2 flex items-center gap-3">
                   <img
@@ -53,15 +53,16 @@ const AllBooks = () => {
                     alt={book.title}
                     className="w-12 h-16 object-cover rounded"
                   />
-                  <span>{book.title}</span>
+                  <span className="text-sm sm:text-base">{book.title}</span>
                 </td>
-                
-                <td className="px-4 py-2">{book.author}</td>
-                <td className="px-4 py-2">{book.genre}</td>
-                <td className="px-4 py-2">{book.rating}/5</td>
-                <td className="px-4 py-2">
+
+                <td className="px-4 py-2 hidden sm:table-cell text-sm sm:text-base">{book.author}</td>
+                <td className="px-4 py-2 hidden md:table-cell text-sm md:text-base">{book.genre}</td>
+                <td className="px-4 py-2 hidden lg:table-cell text-sm lg:text-base">{book.rating}/5</td>
+
+                <td className="px-4 py-4">
                   <Link to={`/book/${book._id}`}>
-                    <button className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                    <button className="w-full sm:w-auto px-2 sm:px-3 py-1 text-xs sm:text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition whitespace-nowrap">
                       View Details
                     </button>
                   </Link>
