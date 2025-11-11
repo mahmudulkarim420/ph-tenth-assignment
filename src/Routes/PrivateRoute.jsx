@@ -1,24 +1,19 @@
-// PrivateRoute.jsx
-import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
+import Spinner from "../Components/Spinner";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
+  const location = useLocation();
 
-  if (loading) {
-    // Optional: loading spinner
-    return <div className="text-center mt-10 text-white">Loading...</div>;
-  }
+  if (loading) return <Spinner />; // Firebase auth-loading spinner
 
   if (!user) {
-    // If user is not logged in, redirect to login page
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // If logged in, show the requested page
   return children;
 };
 
 export default PrivateRoute;
-
