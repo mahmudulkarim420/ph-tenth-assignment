@@ -3,6 +3,8 @@ import Navbar from '../Components/Navbar';
 import { Outlet } from 'react-router-dom';
 import Footer from '../Components/Footer';
 import Loading from '../Components/Spinner'; // আগের loading component
+import Spinner from '../Components/Spinner';
+import RouteChangeSpinner from '../Components/RouteChangeSpinner';
 
 const Layouts = () => {
   const [loading, setLoading] = useState(true);
@@ -14,11 +16,12 @@ const Layouts = () => {
   }, []);
 
   if (loading) {
-    return <Loading />; // Full screen loading
+    return <Spinner />; // Full screen loading
   }
 
   return (
     <div className="min-h-screen flex flex-col">
+      <RouteChangeSpinner />
       <Navbar />
       <main className="flex-1">
         <Outlet />

@@ -9,6 +9,8 @@ import AllBooks from '../Pages/AllBooks';
 import PrivateRoute from './PrivateRoute';
 import AddBook from '../Pages/AddBook';
 import MyBooks from '../Pages/MyBooks';
+import Profile from '../Pages/Profile';
+import EditProfile from '../Pages/EditProfile';
 
 const Router = createBrowserRouter([
   {
@@ -46,6 +48,19 @@ const Router = createBrowserRouter([
         element: 
         <PrivateRoute>
           <MyBooks/>
+        </PrivateRoute>
+      },
+      {
+        path: "profile",
+        element: 
+        <PrivateRoute>
+          <Profile/>
+        </PrivateRoute>
+      },{
+        path: "edit-Profile",
+        element: 
+        <PrivateRoute>
+          <EditProfile/>
         </PrivateRoute>
       },
       {
