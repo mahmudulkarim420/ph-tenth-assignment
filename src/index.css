@@ -1,12 +1,13 @@
+/* index.css */
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
-/* index.css */
-body {
-  @apply bg-gradient-to-r from-[#1A2A6C] via-[#B21F1F] to-[#FDBB2D] min-h-screen;
-}
-
 
 *{
   font-family: 'Nunito Sans', sans-serif;
+}
+
+/* body bg will now be handled dynamically by JS */
+body {
+  min-height: 100vh;
 }
