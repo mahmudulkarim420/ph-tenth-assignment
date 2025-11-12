@@ -21,7 +21,7 @@ const WhyUs = () => {
     <div className="max-w-6xl mx-auto text-center mt-20 px-4">
       <h2 className="text-3xl font-bold text-white">Why Choose Us?</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 hover:cursor-pointer">
         {items.map((item, i) => (
           <div
             key={i}

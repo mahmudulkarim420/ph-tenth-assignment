@@ -63,7 +63,7 @@ const AllBooks = () => {
 
                 <td className="px-4 py-4">
                   <Link to={`/book/${book._id}`}>
-                    <button className="w-full sm:w-auto px-2 sm:px-3 py-1 text-xs sm:text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition whitespace-nowrap">
+                    <button className="w-full sm:w-auto px-2 sm:px-3 py-1 text-xs sm:text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition whitespace-nowrap hover:cursor-pointer">
                       View Details
                     </button>
                   </Link>

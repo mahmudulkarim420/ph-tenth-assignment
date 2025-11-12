@@ -124,7 +124,7 @@ const AddBook = () => {
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold transition"
+            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold transition hover:cursor-pointer"
           >
             {loading ? "Adding..." : "Add Book"}
           </button>

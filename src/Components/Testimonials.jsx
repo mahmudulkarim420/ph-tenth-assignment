@@ -9,7 +9,7 @@ const Testimonials = () => {
     <div className="max-w-6xl mx-auto mt-20 px-4 text-center">
       <h2 className="text-3xl font-bold text-white">What Readers Say</h2>
 
-      <div className="grid md:grid-cols-3 gap-6 mt-8">
+      <div className="grid md:grid-cols-3 gap-6 mt-8 hover:cursor-pointer">
         {people.map((p, i) => (
           <div
             key={i}
