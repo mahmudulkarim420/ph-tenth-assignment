@@ -6,6 +6,7 @@ import Spinner from "../Components/Spinner";
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState("desc"); // desc = high to low
 
   useEffect(() => {
     axios
@@ -20,15 +21,33 @@ const AllBooks = () => {
       });
   }, []);
 
+  const handleSort = () => {
+    const sortedBooks = [...books].sort((a, b) =>
+      sortOrder === "desc" ? b.rating - a.rating : a.rating - b.rating
+    );
+    setBooks(sortedBooks);
+    setSortOrder(sortOrder === "desc" ? "asc" : "desc"); // toggle order
+  };
+
   if (loading) {
-    return <Spinner />;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spinner />
+      </div>
+    );
   }
 
   return (
     <div className="max-w-6xl mx-auto px-4 mt-10">
-      <h2 className="text-3xl font-bold text-white text-center mb-6">
-        All Books
-      </h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-3xl font-bold text-white">All Books</h2>
+        <button
+          onClick={handleSort}
+          className="px-4 py-2 bg-white text-black rounded transition"
+        >
+          Sort by Rating ({sortOrder === "desc" ? "High → Low" : "Low → High"})
+        </button>
+      </div>
 
       <div className="overflow-x-auto mb-10">
         <table className="min-w-full bg-white/10 backdrop-blur-lg text-white rounded-lg">
@@ -47,7 +66,6 @@ const AllBooks = () => {
               <tr key={book._id} className="hover:bg-white/20 transition">
                 <td className="px-4 py-2">{index + 1}</td>
 
-                {/* Title + Image */}
                 <td className="px-4 py-2 flex items-center gap-3">
                   <img
                     src={book.coverImage}
