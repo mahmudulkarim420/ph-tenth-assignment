@@ -29,12 +29,12 @@ const Home = () => {
         {books.slice(0, 6).map((book) => (
           <div
             key={book._id}
-            className="bg-white rounded-lg shadow-lg p-4 hover:scale-105 transition"
+            className="bg-white  rounded-lg shadow-lg p-4 hover:scale-105 transition"
           >
             <img
               src={book.coverImage}
               alt={book.title}
-              className="w-full h-64 object-cover rounded-md"
+              className="w-full h-100 object-cover rounded-md"
             />
 
             <h3 className="text-lg font-semibold mt-2">{book.title}</h3>
