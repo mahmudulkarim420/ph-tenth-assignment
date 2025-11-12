@@ -11,7 +11,7 @@ const Navbar = () => {
   const location = useLocation();
   const [routeLoading, setRouteLoading] = useState(false);
 
-  // Firebase user load না হওয়া পর্যন্ত Navbar দেখাবে না
+  
   if (authLoading) return null;
 
   // Logout হ্যান্ডলার
