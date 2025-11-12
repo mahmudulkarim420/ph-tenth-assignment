@@ -34,7 +34,7 @@ const AddBook = () => {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:3000/books", {
+      await axios.post("https://books-haven-prem-server-kappa.vercel.app/books", {
         ...formData,
         rating: Number(formData.rating), // ensure rating is a number
       });

@@ -9,7 +9,7 @@ const AllBooks = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/books")
+      .get("https://books-haven-prem-server-kappa.vercel.app/books")
       .then((res) => {
         setBooks(res.data);
         setLoading(false);
