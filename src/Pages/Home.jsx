@@ -6,16 +6,34 @@ import Categories from '../Components/Categories';
 import WhyUs from '../Components/WhyUs';
 import Testimonials from '../Components/Testimonials';
 import Newsletter from '../Components/Newsletter';
+import Spinner from '../Components/Spinner'; // Spinner import করো
 
 const Home = () => {
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true); // ✅ loading state
 
   useEffect(() => {
-    axios
-      .get('https://books-haven-prem-server-kappa.vercel.app/books')
-      .then((res) => setBooks(res.data))
-      .catch((err) => console.error(err));
+    const fetchBooks = async () => {
+      try {
+        setLoading(true); // fetch শুরু হলে loading true
+        const res = await axios.get(
+          'https://books-haven-prem-server-kappa.vercel.app/books'
+        );
+        setBooks(res.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false); // fetch শেষ হলে loading false
+      }
+    };
+
+    fetchBooks();
   }, []);
+
+  // ✅ যদি loading true হয়, Spinner দেখাও
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div>
@@ -29,12 +47,13 @@ const Home = () => {
         {books.slice(0, 6).map((book) => (
           <div
             key={book._id}
-            className="bg-white  rounded-lg shadow-lg p-4 hover:scale-105 transition"
+            className="bg-white rounded-lg shadow-lg p-4 hover:scale-105 transition"
           >
             <img
               src={book.coverImage}
               alt={book.title}
-              className="w-full h-100 object-cover rounded-md"/>
+              className="w-full h-100 object-cover rounded-md"
+            />
 
             <h3 className="text-lg font-semibold mt-2">{book.title}</h3>
             <p className="text-sm text-gray-600">
@@ -58,6 +77,7 @@ const Home = () => {
           </button>
         </Link>
       </div>
+
       <Categories />
       <WhyUs />
       <Testimonials />
