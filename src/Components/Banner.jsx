@@ -37,55 +37,56 @@ const Banner = () => {
     <div className="w-full py-16">
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-10">
         {/* LEFT TEXT */}
-        <div>
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-white">
-            Explore & Discover
-            <br />
-            <span className="text-blue-600 dark:text-blue-400">
-              Your Favorite Books
-            </span>
-          </h1>
+        {/* LEFT TEXT */}
+<div className="text-center md:text-left"> {/* Mobile: center, Desktop: left */}
+  <h1 className="text-4xl md:text-5xl font-bold leading-tight text-gray-900 dark:text-white">
+    Explore & Discover
+    <br />
+    <span className="text-blue-600 dark:text-blue-400">
+      Your Favorite Books
+    </span>
+  </h1>
 
-          <p className="mt-4 text-gray-600 dark:text-gray-300 text-lg">
-            Browse thousands of books, find reviews, and save your favorites.
-            Your reading journey starts here!
-          </p>
+  <p className="mt-4 text-white md:text-gray-600 dark:text-white text-lg">
+    Browse thousands of books, find reviews, and save your favorites.
+    Your reading journey starts here!
+  </p>
 
-          <div className="mt-6 flex gap-4">
-            <Link
-              to="/all-books"
-              className="px-6 py-3 rounded-xl font-semibold text-white 
-                 bg-gradient-to-r from-blue-500 to-indigo-600
-                 hover:from-indigo-600 hover:to-blue-500 
-                 shadow-md hover:shadow-xl transition-all duration-300"
-            >
-              Explore Books
-            </Link>
+  <div className="mt-6 flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+    <Link
+      to="/all-books"
+      className="px-6 py-3 rounded-xl font-semibold text-white 
+         bg-gradient-to-r from-blue-500 to-indigo-600
+         hover:from-indigo-600 hover:to-blue-500 
+         shadow-md hover:shadow-xl transition-all duration-300"
+    >
+      Explore Books
+    </Link>
 
-            {/* ✅ Conditional Button */}
-            {user ? (
-              <Link
-                to="/profile"
-                className="px-6 py-3 rounded-xl font-semibold 
-                   bg-white text-gray-800 border border-gray-300
-                   hover:bg-gray-100 shadow-md hover:shadow-xl
-                   transition-all duration-300"
-              >
-                My Profile
-              </Link>
-            ) : (
-              <Link
-                to="/register"
-                className="px-6 py-3 rounded-xl font-semibold 
-                   bg-white text-gray-800 border border-gray-300
-                   hover:bg-gray-100 shadow-md hover:shadow-xl
-                   transition-all duration-300"
-              >
-                Create Account
-              </Link>
-            )}
-          </div>
-        </div>
+    {user ? (
+      <Link
+        to="/profile"
+        className="px-6 py-3 rounded-xl font-semibold 
+           bg-white text-gray-800 border border-gray-300
+           hover:bg-gray-100 shadow-md hover:shadow-xl
+           transition-all duration-300"
+      >
+        My Profile
+      </Link>
+    ) : (
+      <Link
+        to="/register"
+        className="px-6 py-3 rounded-xl font-semibold 
+           bg-white text-gray-800 border border-gray-300
+           hover:bg-gray-100 shadow-md hover:shadow-xl
+           transition-all duration-300"
+      >
+        Create Account
+      </Link>
+    )}
+  </div>
+</div>
+
 
         {/* RIGHT SLIDE */}
         <div
