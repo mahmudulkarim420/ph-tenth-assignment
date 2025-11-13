@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../Providers/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../Providers/AuthProvider';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const EditProfile = () => {
-  const { user, updateProfileData } = useContext(AuthContext); // updateProfileData function AuthProvider এ তৈরি করতে হবে
-  const [name, setName] = useState(user?.displayName || "");
-  const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
+  const { user, updateProfileData } = useContext(AuthContext);
+  const [name, setName] = useState(user?.displayName || '');
+  const [photoURL, setPhotoURL] = useState(user?.photoURL || '');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -14,28 +14,29 @@ const EditProfile = () => {
 
     try {
       await updateProfileData({ displayName: name, photoURL });
-      toast.success("Profile updated successfully!");
-      navigate("/profile");
+      toast.success('Profile updated successfully!');
+      navigate('/profile');
     } catch (err) {
-      toast.error("Something went wrong!");
+      toast.error('Something went wrong!');
       console.error(err);
     }
   };
 
   return (
     <div className="min-h-screen  flex items-center justify-center py-10">
-      <div className="  bg-white/10 backdrop-blur-lg border border-white/20 
+      <div
+        className="  bg-white/10 backdrop-blur-lg border border-white/20 
               rounded-xl p-6 text-white shadow-lg
               transition-all duration-300 
               hover:scale-105 hover:shadow-2xl hover:shadow-yellow-400/20 
-              hover:bg-white/20 hover:-translate-y-2   w-full max-w-md">
+              hover:bg-white/20 hover:-translate-y-2   w-full max-w-md"
+      >
         <h2 className="text-2xl font-bold text-center mb-6">Edit Profile</h2>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {/* Profile Picture */}
           <div className="flex flex-col items-center">
             <img
-              src={photoURL || "https://via.placeholder.com/150"}
+              src={photoURL || 'https://via.placeholder.com/150'}
               alt="Profile"
               className="w-24 h-24 rounded-full border-4 border-blue-500 mb-2"
             />
@@ -48,7 +49,6 @@ const EditProfile = () => {
             />
           </div>
 
-          {/* Name */}
           <input
             type="text"
             placeholder="Name"
@@ -57,12 +57,11 @@ const EditProfile = () => {
             onChange={(e) => setName(e.target.value)}
           />
 
-          {/* Email (readonly) */}
           <input
             type="email"
             placeholder="Email"
             className="w-full px-4 py-2 border rounded-lg text-white focus:outline-none focus-within:ring-2 focus-within:ring-blue-500"
-            value={user?.email || ""}
+            value={user?.email || ''}
             readOnly
           />
 

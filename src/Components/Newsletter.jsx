@@ -2,7 +2,7 @@ const Newsletter = () => {
   return (
     <div
       className="max-w-6xl mx-auto bg-white/10 p-15 rounded-2xl shadow-xl mt-24 text-center backdrop-blur-lg mb-10
-                    transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+      transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
     >
       <h2 className="text-3xl font-bold text-white">Stay Updated</h2>
       <p className="text-white/80 mt-2">

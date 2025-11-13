@@ -30,7 +30,6 @@ const Register = () => {
     try {
       const result = await createUser(email, password);
 
-      // Update profile
       await updateProfile(result.user, {
         displayName: name,
         photoURL: photo || 'https://via.placeholder.com/40',

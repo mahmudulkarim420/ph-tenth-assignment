@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import Spinner from "../Components/Spinner";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Spinner from '../Components/Spinner';
 
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [sortOrder, setSortOrder] = useState("desc"); 
+  const [sortOrder, setSortOrder] = useState('desc');
 
   useEffect(() => {
     axios
-      .get("https://books-haven-prem-server-kappa.vercel.app/books")
+      .get('https://books-haven-prem-server-kappa.vercel.app/books')
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setBooks(res.data);
         setLoading(false);
       })
@@ -24,10 +24,10 @@ const AllBooks = () => {
 
   const handleSort = () => {
     const sortedBooks = [...books].sort((a, b) =>
-      sortOrder === "desc" ? b.rating - a.rating : a.rating - b.rating
+      sortOrder === 'desc' ? b.rating - a.rating : a.rating - b.rating
     );
     setBooks(sortedBooks);
-    setSortOrder(sortOrder === "desc" ? "asc" : "desc"); 
+    setSortOrder(sortOrder === 'desc' ? 'asc' : 'desc');
   };
 
   if (loading) {
@@ -46,7 +46,7 @@ const AllBooks = () => {
           onClick={handleSort}
           className="px-4 py-2 bg-white text-black rounded transition"
         >
-          Sort by Rating ({sortOrder === "desc" ? "High → Low" : "Low → High"})
+          Sort by Rating ({sortOrder === 'desc' ? 'High → Low' : 'Low → High'})
         </button>
       </div>
 
@@ -56,9 +56,15 @@ const AllBooks = () => {
             <tr className="border-b border-white/30">
               <th className="px-4 py-2 text-left">#</th>
               <th className="px-4 py-2 text-left">Title</th>
-              <th className="px-4 py-2 text-left hidden sm:table-cell">Author</th>
-              <th className="px-4 py-2 text-left hidden md:table-cell">Genre</th>
-              <th className="px-4 py-2 text-left hidden lg:table-cell">Rating</th>
+              <th className="px-4 py-2 text-left hidden sm:table-cell">
+                Author
+              </th>
+              <th className="px-4 py-2 text-left hidden md:table-cell">
+                Genre
+              </th>
+              <th className="px-4 py-2 text-left hidden lg:table-cell">
+                Rating
+              </th>
               <th className="px-4 py-2 text-left">Action</th>
             </tr>
           </thead>
@@ -76,9 +82,15 @@ const AllBooks = () => {
                   <span className="text-sm sm:text-base">{book.title}</span>
                 </td>
 
-                <td className="px-4 py-2 hidden sm:table-cell text-sm sm:text-base">{book.author}</td>
-                <td className="px-4 py-2 hidden md:table-cell text-sm md:text-base">{book.genre}</td>
-                <td className="px-4 py-2 hidden lg:table-cell text-sm lg:text-base">{book.rating}/5</td>
+                <td className="px-4 py-2 hidden sm:table-cell text-sm sm:text-base">
+                  {book.author}
+                </td>
+                <td className="px-4 py-2 hidden md:table-cell text-sm md:text-base">
+                  {book.genre}
+                </td>
+                <td className="px-4 py-2 hidden lg:table-cell text-sm lg:text-base">
+                  {book.rating}/5
+                </td>
 
                 <td className="px-4 py-4">
                   <Link to={`/book/${book._id}`}>

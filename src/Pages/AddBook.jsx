@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../Providers/AuthProvider';
 
 const AddBook = () => {
-  const { user } = useContext(AuthContext); // ✅ get logged-in user
+  const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     title: '',
     author: '',
@@ -20,7 +20,7 @@ const AddBook = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Validate required fields
+    e.preventDefault();
 
     if (
       !formData.title ||
@@ -34,16 +34,16 @@ const AddBook = () => {
     }
 
     try {
-      setLoading(true); // ✅ The URL and POST method are correct, matching the backend route: /books
+      setLoading(true);
       await axios.post(
         'https://books-haven-prem-server-kappa.vercel.app/books',
         {
           ...formData,
-          rating: Number(formData.rating), // Convert rating to number
-          userId: user?.uid, // Add logged-in user's ID
+          rating: Number(formData.rating),
+          userId: user?.uid,
         }
       );
-      toast.success('Book added successfully!'); // Reset form after success
+      toast.success('Book added successfully!');
       setFormData({
         title: '',
         author: '',
@@ -53,7 +53,6 @@ const AddBook = () => {
         coverImage: '',
       });
     } catch (err) {
-      console.error('Add book error:', err); // Display a more helpful error if available, otherwise use generic
       const errorMessage = err.response?.data?.message || 'Failed to add book!';
       toast.error(errorMessage);
     } finally {
@@ -71,8 +70,9 @@ hover:scale-105 hover:shadow-2xl hover:shadow-yellow-400/20
               hover:bg-white/20 hover:-translate-y-2  w-full max-w-lg text-white shadow-lg"
       >
         {' '}
-        <h2 className="text-3xl font-bold mb-6 text-center">Add a New Book</h2>
-        {' '}
+        <h2 className="text-3xl font-bold mb-6 text-center">
+          Add a New Book
+        </h2>{' '}
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           {' '}
           <input
@@ -82,8 +82,7 @@ hover:scale-105 hover:shadow-2xl hover:shadow-yellow-400/20
             value={formData.title}
             onChange={handleChange}
             className="px-4 py-2 rounded-lg bg-white/20 placeholder-white text-white border border-white/30 focus:border-blue-500 outline-none"
-          />
-          {' '}
+          />{' '}
           <input
             type="text"
             name="author"
@@ -91,8 +90,7 @@ hover:scale-105 hover:shadow-2xl hover:shadow-yellow-400/20
             value={formData.author}
             onChange={handleChange}
             className="px-4 py-2 rounded-lg bg-white/20 placeholder-white text-white border border-white/30 focus:border-blue-500 outline-none"
-          />
-          {' '}
+          />{' '}
           <input
             type="text"
             name="genre"
@@ -100,8 +98,7 @@ hover:scale-105 hover:shadow-2xl hover:shadow-yellow-400/20
             value={formData.genre}
             onChange={handleChange}
             className="px-4 py-2 rounded-lg bg-white/20 placeholder-white text-white border border-white/30 focus:border-blue-500 outline-none"
-          />
-          {' '}
+          />{' '}
           <input
             type="number"
             name="rating"
@@ -111,8 +108,7 @@ hover:scale-105 hover:shadow-2xl hover:shadow-yellow-400/20
             value={formData.rating}
             onChange={handleChange}
             className="px-4 py-2 rounded-lg bg-white/20 placeholder-white text-white border border-white/30 focus:border-blue-500 outline-none"
-          />
-          {' '}
+          />{' '}
           <input
             type="text"
             name="coverImage"
@@ -120,8 +116,7 @@ hover:scale-105 hover:shadow-2xl hover:shadow-yellow-400/20
             value={formData.coverImage}
             onChange={handleChange}
             className="px-4 py-2 rounded-lg bg-white/20 placeholder-white text-white border border-white/30 focus:border-blue-500 outline-none"
-          />
-          {' '}
+          />{' '}
           <textarea
             name="summary"
             placeholder="Book Summary"
@@ -129,8 +124,7 @@ hover:scale-105 hover:shadow-2xl hover:shadow-yellow-400/20
             onChange={handleChange}
             rows="4"
             className="px-4 py-2 rounded-lg bg-white/20 placeholder-white text-white border border-white/30 focus:border-blue-500 outline-none"
-          ></textarea>
-          {' '}
+          ></textarea>{' '}
           <button
             type="submit"
             disabled={loading}
@@ -139,8 +133,7 @@ hover:scale-105 hover:shadow-2xl hover:shadow-yellow-400/20
             {loading ? 'Adding...' : 'Add Book'}
           </button>
         </form>
-      </div>
-      {' '}
+      </div>{' '}
     </div>
   );
 };

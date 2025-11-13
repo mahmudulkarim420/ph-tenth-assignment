@@ -14,9 +14,8 @@ const BookDetails = () => {
   const [commentLoading, setCommentLoading] = useState(false);
   const { user } = useContext(AuthContext);
 
-  const API = 'https://books-haven-prem-server-kappa.vercel.app'; // backend URL
+  const API = 'https://books-haven-prem-server-kappa.vercel.app';
 
-  // Fetch single book
   useEffect(() => {
     const fetchBook = async () => {
       try {
@@ -31,7 +30,6 @@ const BookDetails = () => {
     fetchBook();
   }, [id]);
 
-  // Fetch comments
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -47,7 +45,6 @@ const BookDetails = () => {
     return () => clearInterval(interval);
   }, [id]);
 
-  // Add new comment
   const handleAddComment = async (e) => {
     e.preventDefault();
     if (!newComment.trim()) return toast.error('Comment cannot be empty!');
@@ -75,28 +72,47 @@ const BookDetails = () => {
   };
 
   if (loading) return <Spinner />;
-  if (!book) return <div className="min-h-screen flex items-center justify-center text-white">
-    <h1 className="text-2xl font-semibold">Book not found!</h1>
-  </div>;
+  if (!book)
+    return (
+      <div className="min-h-screen flex items-center justify-center text-white">
+        <h1 className="text-2xl font-semibold">Book not found!</h1>
+      </div>
+    );
 
   return (
     <div className="min-h-screen text-white py-10">
-      <div className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg border border-white/20 
-                      rounded-xl p-6 shadow-lg flex flex-col md:flex-row gap-6">
-        <img src={book.coverImage} alt={book.title} className="w-full md:w-1/3 h-auto rounded-xl object-cover border-4 border-blue-500" />
+      <div
+        className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg border border-white/20 
+        rounded-xl p-6 shadow-lg flex flex-col md:flex-row gap-6"
+      >
+        <img
+          src={book.coverImage}
+          alt={book.title}
+          className="w-full md:w-1/3 h-auto rounded-xl object-cover border-4 border-blue-500"
+        />
         <div className="flex-1">
           <h2 className="text-3xl font-bold">{book.title}</h2>
-          <p className="text-gray-300 mt-2"><strong>Author:</strong> {book.author}</p>
-          <p className="text-gray-300 mt-1"><strong>Genre:</strong> {book.genre}</p>
-          <p className="text-yellow-400 mt-1"><strong>Rating:</strong> {book.rating}/5</p>
+          <p className="text-gray-300 mt-2">
+            <strong>Author:</strong> {book.author}
+          </p>
+          <p className="text-gray-300 mt-1">
+            <strong>Genre:</strong> {book.genre}
+          </p>
+          <p className="text-yellow-400 mt-1">
+            <strong>Rating:</strong> {book.rating}/5
+          </p>
           <p className="mt-4 text-gray-200">{book.summary}</p>
 
-          <Link to="/all-books" className="inline-block mt-6 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Back to All Books</Link>
+          <Link
+            to="/all-books"
+            className="inline-block mt-6 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
+          >
+            Back to All Books
+          </Link>
         </div>
       </div>
 
-      {/* Comments */}
-        <div className="max-w-4xl mx-auto mt-10 bg-white/10 p-6 rounded-xl">
+      <div className="max-w-4xl mx-auto mt-10 bg-white/10 p-6 rounded-xl">
         <h3 className="text-2xl font-semibold mb-4">Comments</h3>
 
         {user ? (
@@ -128,7 +144,10 @@ const BookDetails = () => {
         ) : (
           <div className="space-y-4">
             {comments.map((cmt) => (
-              <div key={cmt._id || Math.random()} className="bg-white/20 p-3 rounded-lg flex items-start gap-3">
+              <div
+                key={cmt._id || Math.random()}
+                className="bg-white/20 p-3 rounded-lg flex items-start gap-3"
+              >
                 {cmt.photoURL && (
                   <img
                     src={cmt.photoURL}

@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import toast from "react-hot-toast";
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const UpdateBook = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    title: "",
-    author: "",
-    genre: "",
-    rating: "",
-    summary: "",
-    coverImage: "",
+    title: '',
+    author: '',
+    genre: '',
+    rating: '',
+    summary: '',
+    coverImage: '',
   });
 
   const [loading, setLoading] = useState(false);
 
-  // Fetch current book data
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const res = await axios.get(`https://books-haven-prem-server-kappa.vercel.app/books/${id}`);
-        const { _id, ...bookData } = res.data; // Remove _id to prevent MongoDB update issue
+        const res = await axios.get(
+          `https://books-haven-prem-server-kappa.vercel.app/books/${id}`
+        );
+        const { _id, ...bookData } = res.data;
         setFormData(bookData);
       } catch (err) {
-        console.error("Fetch book error:", err);
-        toast.error("Failed to fetch book info");
+        console.error('Fetch book error:', err);
+        toast.error('Failed to fetch book info');
       }
     };
     fetchBook();
@@ -41,16 +42,20 @@ const UpdateBook = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { _id, ...dataToUpdate } = formData; // just in case
-      await axios.put(`https://books-haven-prem-server-kappa.vercel.app/books/${id}`, {
-        ...dataToUpdate,
-        rating: Number(formData.rating),
-      });
-      toast.success("Book updated successfully!");
-      navigate("/my-books"); // MyBooks page এ redirect
+      const { _id, ...dataToUpdate } = formData;
+      await axios.put(
+        `https://books-haven-prem-server-kappa.vercel.app/books/${id}`,
+        {
+          ...dataToUpdate,
+          rating: Number(formData.rating),
+        }
+      );
+      toast.success('Book updated successfully!');
+      navigate('/my-books');
     } catch (err) {
-      console.error("Update book error:", err);
-      const errorMessage = err.response?.data?.message || "Failed to update book";
+      console.error('Update book error:', err);
+      const errorMessage =
+        err.response?.data?.message || 'Failed to update book';
       toast.error(errorMessage);
     } finally {
       setLoading(false);
@@ -117,7 +122,7 @@ const UpdateBook = () => {
             disabled={loading}
             className="px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold transition hover:cursor-pointer"
           >
-            {loading ? "Updating..." : "Update Book"}
+            {loading ? 'Updating...' : 'Update Book'}
           </button>
         </form>
       </div>

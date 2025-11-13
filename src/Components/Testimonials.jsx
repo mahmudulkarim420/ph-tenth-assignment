@@ -1,8 +1,8 @@
 const Testimonials = () => {
   const people = [
-    { name: "Aarav", text: "This website helped me discover amazing books!" },
-    { name: "Meher", text: "Very easy to use and super clean UI." },
-    { name: "Rahim", text: "Loved the smooth experience & beautiful design!" },
+    { name: 'Aarav', text: 'This website helped me discover amazing books!' },
+    { name: 'Meher', text: 'Very easy to use and super clean UI.' },
+    { name: 'Rahim', text: 'Loved the smooth experience & beautiful design!' },
   ];
 
   return (
@@ -17,9 +17,7 @@ const Testimonials = () => {
               bg-white/10 text-white p-10 rounded-xl backdrop-blur-lg shadow-lg
               transition-all duration-300
               hover:scale-105 hover:shadow-2xl hover:shadow-yellow-400/30
-              hover:bg-white/20 hover:-translate-y-2
-            "
-          >
+              hover:bg-white/20 hover:-translate-y-2">
             <p>"{p.text}"</p>
             <h3 className="mt-3 font-semibold">{p.name}</h3>
           </div>

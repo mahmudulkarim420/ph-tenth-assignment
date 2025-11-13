@@ -9,7 +9,6 @@ const MyBooks = () => {
   const [books, setBooks] = useState([]);
   const navigate = useNavigate();
 
-  // Fetch user's books
   const fetchBooks = async () => {
     if (!user?.uid) return;
     try {
@@ -27,7 +26,6 @@ const MyBooks = () => {
     fetchBooks();
   }, [user]);
 
-  // Delete a book
   const handleDelete = async (id) => {
     try {
       await axios.delete(
@@ -41,7 +39,6 @@ const MyBooks = () => {
     }
   };
 
-  // Navigate to UpdateBook page
   const handleGoToUpdate = (id) => {
     navigate(`/update-book/${id}`);
   };

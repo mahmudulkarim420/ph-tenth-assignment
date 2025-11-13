@@ -33,6 +33,7 @@ const Categories = () => {
         Browse by Category
       </h2>
 
+
       <Swiper
         modules={[Autoplay]}
         spaceBetween={20}

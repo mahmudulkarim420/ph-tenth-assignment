@@ -1,10 +1,10 @@
 import React from 'react';
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter } from 'react-router';
 import Layouts from '../Layouts/Layouts';
 import Home from '../Pages/Home';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
-import Error404 from '../Pages/Error404'; // Import your 404 page
+import Error404 from '../Pages/Error404'; 
 import AllBooks from '../Pages/AllBooks';
 import PrivateRoute from './PrivateRoute';
 import AddBook from '../Pages/AddBook';
@@ -14,85 +14,93 @@ import EditProfile from '../Pages/EditProfile';
 import BookDetails from '../Pages/BookDetails';
 import UpdateBook from '../Pages/UpdateBook';
 
-
 const Router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Layouts />,
     children: [
       {
         index: true,
-        element: <Home />
+        element: <Home />,
       },
       {
-        path: "login",
-        element: <Login />
+        path: 'login',
+        element: <Login />,
       },
       {
-        path: "register",
-        element: <Register />
+        path: 'register',
+        element: <Register />,
       },
       {
-        path: "all-books",
-        element: 
-        <PrivateRoute>
-          <AllBooks/>
-        </PrivateRoute>
+        path: 'all-books',
+        element: (
+          <PrivateRoute>
+            <AllBooks />
+          </PrivateRoute>
+        ),
       },
       {
-        path: "add-book",
-        element: 
-        <PrivateRoute>
-          <AddBook/>
-        </PrivateRoute>
+        path: 'add-book',
+        element: (
+          <PrivateRoute>
+            <AddBook />
+          </PrivateRoute>
+        ),
       },
       {
-        path: "my-books",
-        element: 
-        <PrivateRoute>
-          <MyBooks/>
-        </PrivateRoute>
+        path: 'my-books',
+        element: (
+          <PrivateRoute>
+            <MyBooks />
+          </PrivateRoute>
+        ),
       },
       {
-        path: "profile",
-        element: 
-        <PrivateRoute>
-          <Profile/>
-        </PrivateRoute>
-      },{
-        path: "edit-Profile",
-        element: 
-        <PrivateRoute>
-          <EditProfile/>
-        </PrivateRoute>
+        path: 'profile',
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
       {
-        path: "book/:id",
-        element: 
-        <PrivateRoute>
-          <BookDetails/>
-        </PrivateRoute>
+        path: 'edit-Profile',
+        element: (
+          <PrivateRoute>
+            <EditProfile />
+          </PrivateRoute>
+        ),
       },
       {
-        path: "add-book",
-        element: 
-        <PrivateRoute>
-          <AddBook/>
-        </PrivateRoute>
+        path: 'book/:id',
+        element: (
+          <PrivateRoute>
+            <BookDetails />
+          </PrivateRoute>
+        ),
       },
       {
-        path: "update-book/:id",
-        element: 
-        <PrivateRoute>
-          <UpdateBook/>
-        </PrivateRoute>
+        path: 'add-book',
+        element: (
+          <PrivateRoute>
+            <AddBook />
+          </PrivateRoute>
+        ),
       },
       {
-        path: "*",       
-        element: <Error404 />
-      }
-    ]
-  }
+        path: 'update-book/:id',
+        element: (
+          <PrivateRoute>
+            <UpdateBook />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '*',
+        element: <Error404 />,
+      },
+    ],
+  },
 ]);
 
 export default Router;

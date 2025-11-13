@@ -4,7 +4,7 @@ import { GiBookmark } from 'react-icons/gi';
 import { AuthContext } from '../Providers/AuthProvider';
 import RouteChangeSpinner from './RouteChangeSpinner';
 import { FaSun, FaMoon, FaAdjust } from 'react-icons/fa';
-import { MdLightMode } from "react-icons/md";
+import { MdLightMode } from 'react-icons/md';
 
 const Navbar = ({ theme, setTheme }) => {
   const [open, setOpen] = useState(false);
@@ -17,7 +17,6 @@ const Navbar = ({ theme, setTheme }) => {
 
   const themeRef = useRef();
 
-  // Close desktop theme dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (themeRef.current && !themeRef.current.contains(event.target)) {
@@ -28,7 +27,6 @@ const Navbar = ({ theme, setTheme }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Apply theme to body
   useEffect(() => {
     const body = document.body;
     if (theme === 'dark') {
@@ -61,7 +59,9 @@ const Navbar = ({ theme, setTheme }) => {
 
   const navLinkClass = (path) =>
     `hover:text-yellow-300 duration-200 hover:underline ${
-      location.pathname === path ? 'text-yellow-400 font-semibold underline' : ''
+      location.pathname === path
+        ? 'text-yellow-400 font-semibold underline'
+        : ''
     }`;
 
   return (
@@ -78,7 +78,6 @@ const Navbar = ({ theme, setTheme }) => {
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <div className="text-3xl">
               <GiBookmark />
@@ -86,25 +85,30 @@ const Navbar = ({ theme, setTheme }) => {
             <h1 className="text-2xl font-semibold tracking-wide">BooksHaven</h1>
           </Link>
 
-          {/* Desktop Menu */}
           <ul className="hidden md:flex items-center gap-8 text-lg font-medium">
             <li>
-              <Link to="/" className={navLinkClass('/')}>Home</Link>
+              <Link to="/" className={navLinkClass('/')}>
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/all-books" className={navLinkClass('/all-books')}>All Books</Link>
+              <Link to="/all-books" className={navLinkClass('/all-books')}>
+                All Books
+              </Link>
             </li>
             <li>
-              <Link to="/add-book" className={navLinkClass('/add-book')}>Add Book</Link>
+              <Link to="/add-book" className={navLinkClass('/add-book')}>
+                Add Book
+              </Link>
             </li>
             <li>
-              <Link to="/my-books" className={navLinkClass('/my-books')}>My Books</Link>
+              <Link to="/my-books" className={navLinkClass('/my-books')}>
+                My Books
+              </Link>
             </li>
           </ul>
 
-          {/* Desktop Auth/Profile + Theme */}
           <div className="hidden md:flex items-center gap-4 relative">
-            {/* Desktop Theme dropdown */}
             <div ref={themeRef} className="relative">
               <button
                 onClick={() => setThemeOpenDesktop(!themeOpenDesktop)}
@@ -118,19 +122,25 @@ const Navbar = ({ theme, setTheme }) => {
                 <div className="absolute right-0 mt-2 w-32 bg-white border rounded-lg shadow-lg z-50">
                   <button
                     onClick={() => setTheme('default')}
-                    className={`w-full flex items-center gap-2 px-3 py-2 hover:bg-yellow-400 hover:text-white rounded-t-lg ${theme === 'default' ? 'bg-yellow-400 text-white' : ''}`}
+                    className={`w-full flex items-center gap-2 px-3 py-2 hover:bg-yellow-400 hover:text-white rounded-t-lg ${
+                      theme === 'default' ? 'bg-yellow-400 text-white' : ''
+                    }`}
                   >
                     <FaAdjust /> Default
                   </button>
                   <button
                     onClick={() => setTheme('dark')}
-                    className={`w-full flex items-center gap-2 px-3 py-2 bg-black text-white ${theme === 'dark' ? 'bg-gray-800 text-white' : ''}`}
+                    className={`w-full flex items-center gap-2 px-3 py-2 bg-black text-white ${
+                      theme === 'dark' ? 'bg-gray-800 text-white' : ''
+                    }`}
                   >
                     <FaMoon /> Dark
                   </button>
                   <button
                     onClick={() => setTheme('light')}
-                    className={`w-full flex items-center gap-2 px-3 py-2 bg-white text-black rounded-b-lg ${theme === 'light' ? 'bg-yellow-300 text-black' : ''}`}
+                    className={`w-full flex items-center gap-2 px-3 py-2 bg-white text-black rounded-b-lg ${
+                      theme === 'light' ? 'bg-yellow-300 text-black' : ''
+                    }`}
                   >
                     <FaSun /> Light
                   </button>
@@ -147,7 +157,9 @@ const Navbar = ({ theme, setTheme }) => {
                     className="w-10 h-10 rounded-full border-2 border-white cursor-pointer"
                   />
                 </Link>
-                <span className="font-medium">{user.displayName || 'User'}</span>
+                <span className="font-medium">
+                  {user.displayName || 'User'}
+                </span>
                 <button
                   onClick={handleLogout}
                   className="px-3 py-1 bg-red-600 hover:bg-red-700 rounded-lg text-white font-medium"
@@ -173,7 +185,6 @@ const Navbar = ({ theme, setTheme }) => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-3xl text-white"
             onClick={() => setOpen(!open)}
@@ -182,18 +193,40 @@ const Navbar = ({ theme, setTheme }) => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {open && (
           <div className="md:hidden bg-black/50 backdrop-blur-sm p-4 shadow-md shadow-black/40 transition-colors duration-300">
             <ul className="flex flex-col gap-4 text-lg">
-              <Link to="/" onClick={() => setOpen(false)} className={navLinkClass('/')}>Home</Link>
-              <Link to="/all-books" onClick={() => setOpen(false)} className={navLinkClass('/all-books')}>All Books</Link>
-              <Link to="/add-book" onClick={() => setOpen(false)} className={navLinkClass('/add-book')}>Add Book</Link>
-              <Link to="/my-books" onClick={() => setOpen(false)} className={navLinkClass('/my-books')}>My Books</Link>
+              <Link
+                to="/"
+                onClick={() => setOpen(false)}
+                className={navLinkClass('/')}
+              >
+                Home
+              </Link>
+              <Link
+                to="/all-books"
+                onClick={() => setOpen(false)}
+                className={navLinkClass('/all-books')}
+              >
+                All Books
+              </Link>
+              <Link
+                to="/add-book"
+                onClick={() => setOpen(false)}
+                className={navLinkClass('/add-book')}
+              >
+                Add Book
+              </Link>
+              <Link
+                to="/my-books"
+                onClick={() => setOpen(false)}
+                className={navLinkClass('/my-books')}
+              >
+                My Books
+              </Link>
             </ul>
 
             <div className="flex flex-col gap-3 mt-4">
-              {/* Mobile Theme dropdown */}
               <div className="relative">
                 <button
                   onClick={() => setThemeOpenMobile(!themeOpenMobile)}
@@ -206,19 +239,25 @@ const Navbar = ({ theme, setTheme }) => {
                   <div className="absolute mt-2 w-32 bg-white border rounded-lg shadow-lg z-50">
                     <button
                       onClick={() => setTheme('default')}
-                      className={`w-full flex items-center gap-2 px-3 py-2 hover:bg-yellow-400 hover:text-white rounded-t-lg ${theme === 'default' ? 'bg-yellow-400 text-white' : ''}`}
+                      className={`w-full flex items-center gap-2 px-3 py-2 hover:bg-yellow-400 hover:text-white rounded-t-lg ${
+                        theme === 'default' ? 'bg-yellow-400 text-white' : ''
+                      }`}
                     >
                       <FaAdjust /> Default
                     </button>
                     <button
                       onClick={() => setTheme('dark')}
-                      className={`w-full flex items-center gap-2 px-3 py-2 bg-black text-white ${theme === 'dark' ? 'bg-gray-800 text-white' : ''}`}
+                      className={`w-full flex items-center gap-2 px-3 py-2 bg-black text-white ${
+                        theme === 'dark' ? 'bg-gray-800 text-white' : ''
+                      }`}
                     >
                       <FaMoon /> Dark
                     </button>
                     <button
                       onClick={() => setTheme('light')}
-                      className={`w-full flex items-center gap-2 px-3 py-2 bg-white text-black rounded-b-lg ${theme === 'light' ? 'bg-yellow-300 text-black' : ''}`}
+                      className={`w-full flex items-center gap-2 px-3 py-2 bg-white text-black rounded-b-lg ${
+                        theme === 'light' ? 'bg-yellow-300 text-black' : ''
+                      }`}
                     >
                       <FaSun /> Light
                     </button>
@@ -226,7 +265,6 @@ const Navbar = ({ theme, setTheme }) => {
                 )}
               </div>
 
-              {/* Mobile Auth/Profile */}
               {user ? (
                 <div className="flex flex-col gap-2 items-start mt-2 mb-2">
                   <div className="flex items-center gap-2">
@@ -237,7 +275,9 @@ const Navbar = ({ theme, setTheme }) => {
                         className="w-10 h-10 rounded-full border-2 border-white"
                       />
                     </Link>
-                    <span className="font-medium">{user.displayName || 'User'}</span>
+                    <span className="font-medium">
+                      {user.displayName || 'User'}
+                    </span>
                   </div>
                   <button
                     onClick={handleLogout}
@@ -248,10 +288,18 @@ const Navbar = ({ theme, setTheme }) => {
                 </div>
               ) : (
                 <div className="flex flex-col gap-2 mt-2">
-                  <Link to="/login" onClick={() => setOpen(false)} className="px-4 py-2 rounded-lg border border-white text-white hover:bg-white hover:text-black duration-200">
+                  <Link
+                    to="/login"
+                    onClick={() => setOpen(false)}
+                    className="px-4 py-2 rounded-lg border border-white text-white hover:bg-white hover:text-black duration-200"
+                  >
                     Login
                   </Link>
-                  <Link to="/register" onClick={() => setOpen(false)} className="px-4 py-2 rounded-lg bg-black bg-opacity-40 text-white hover:bg-black hover:bg-opacity-60 duration-200">
+                  <Link
+                    to="/register"
+                    onClick={() => setOpen(false)}
+                    className="px-4 py-2 rounded-lg bg-black bg-opacity-40 text-white hover:bg-black hover:bg-opacity-60 duration-200"
+                  >
                     Register
                   </Link>
                 </div>

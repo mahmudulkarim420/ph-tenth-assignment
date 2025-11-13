@@ -7,7 +7,7 @@
   font-family: 'Nunito Sans', sans-serif;
 }
 
-/* body bg will now be handled dynamically by JS */
+
 body {
   min-height: 100vh;
 }

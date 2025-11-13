@@ -1,19 +1,19 @@
 const WhyUs = () => {
   const items = [
     {
-      title: "Huge Collection",
-      desc: "We provide thousands of books across every genre.",
-      icon: "📚"
+      title: 'Huge Collection',
+      desc: 'We provide thousands of books across every genre.',
+      icon: '📚',
     },
     {
-      title: "User Friendly",
-      desc: "Easy navigation with a clean and modern UI.",
-      icon: "✨"
+      title: 'User Friendly',
+      desc: 'Easy navigation with a clean and modern UI.',
+      icon: '✨',
     },
     {
-      title: "Secure Account",
-      desc: "Login/Register securely with Firebase.",
-      icon: "🔐"
+      title: 'Secure Account',
+      desc: 'Login/Register securely with Firebase.',
+      icon: '🔐',
     },
   ];
 
@@ -30,9 +30,7 @@ const WhyUs = () => {
               rounded-xl p-6 text-white shadow-lg
               transition-all duration-300 
               hover:scale-105 hover:shadow-2xl hover:shadow-yellow-400/20 
-              hover:bg-white/20 hover:-translate-y-2
-            "
-          >
+              hover:bg-white/20 hover:-translate-y-2">
             <div className="text-4xl mb-3">{item.icon}</div>
             <h3 className="text-xl font-semibold">{item.title}</h3>
             <p className="mt-2">{item.desc}</p>

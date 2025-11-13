@@ -7,16 +7,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Layouts = () => {
   const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'default');
+  const [theme, setTheme] = useState(
+    localStorage.getItem('theme') || 'default'
+  );
   const location = useLocation();
 
-  // Spinner Loading Effect
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
-  // Theme Control
   useEffect(() => {
     const body = document.body;
 
@@ -27,7 +27,8 @@ const Layouts = () => {
       body.style.background = '#ffffff';
       body.style.color = '#000000';
     } else {
-      body.style.background = 'linear-gradient(120deg, #1A2A6C, #B21F1F, #FDBB2D)';
+      body.style.background =
+        'linear-gradient(120deg, #1A2A6C, #B21F1F, #FDBB2D)';
       body.style.backgroundSize = '400% 400%';
       body.style.animation = 'gradientMove 15s ease infinite';
       body.style.color = '#ffffff';
@@ -41,11 +42,16 @@ const Layouts = () => {
   return (
     <div
       className={`min-h-screen flex flex-col transition-colors duration-300 overflow-hidden
-      ${theme === 'dark' ? 'text-white' : theme === 'light' ? 'text-black' : 'text-white'}`}
+      ${
+        theme === 'dark'
+          ? 'text-white'
+          : theme === 'light'
+          ? 'text-black'
+          : 'text-white'
+      }`}
     >
       <Navbar theme={theme} setTheme={setTheme} />
 
-      {/* Page Transition Animation */}
       <AnimatePresence mode="wait">
         <motion.main
           key={location.pathname}
