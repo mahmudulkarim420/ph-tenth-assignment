@@ -6,16 +6,15 @@ import Categories from '../Components/Categories';
 import WhyUs from '../Components/WhyUs';
 import Testimonials from '../Components/Testimonials';
 import Newsletter from '../Components/Newsletter';
-import Spinner from '../Components/Spinner'; // Spinner import করো
+import Spinner from '../Components/Spinner';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true); // ✅ loading state
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        setLoading(true); // fetch শুরু হলে loading true
+        setLoading(true);
         const res = await axios.get(
           'https://books-haven-prem-server-kappa.vercel.app/books'
         );
@@ -23,14 +22,13 @@ const Home = () => {
       } catch (err) {
         console.error(err);
       } finally {
-        setLoading(false); // fetch শেষ হলে loading false
+        setLoading(false);
       }
     };
 
     fetchBooks();
   }, []);
 
-  // ✅ যদি loading true হয়, Spinner দেখাও
   if (loading) {
     return <Spinner />;
   }
