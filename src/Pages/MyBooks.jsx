@@ -9,6 +9,7 @@ const MyBooks = () => {
   const [books, setBooks] = useState([]);
   const navigate = useNavigate();
 
+  
   const fetchBooks = async () => {
     if (!user?.uid) return;
     try {
@@ -26,6 +27,7 @@ const MyBooks = () => {
     fetchBooks();
   }, [user]);
 
+  
   const handleDelete = async (id) => {
     try {
       await axios.delete(
@@ -39,12 +41,14 @@ const MyBooks = () => {
     }
   };
 
+  
   const handleGoToUpdate = (id) => {
     navigate(`/update-book/${id}`);
   };
 
   return (
     <div className="min-h-screen p-6">
+    <div className="max-w-6xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">My Books</h2>
       {books.length === 0 ? (
         <p className="text-white">You haven't added any books yet.</p>
@@ -81,6 +85,7 @@ const MyBooks = () => {
         </div>
       )}
     </div>
+  </div>
   );
 };
 

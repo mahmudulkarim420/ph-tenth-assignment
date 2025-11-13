@@ -63,8 +63,8 @@ const UpdateBook = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
-      <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-6 w-full max-w-lg text-white">
+    <div className=" min-h-screen flex items-center justify-center p-6">
+      <div className=" bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-6 w-full max-w-lg text-white">
         <h2 className="text-3xl font-bold mb-6 text-center">Update Book</h2>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <input
