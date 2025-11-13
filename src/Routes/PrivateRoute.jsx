@@ -7,7 +7,7 @@ const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
 
-  if (loading) return <Spinner />; // Firebase auth-loading spinner
+  if (loading) return <Spinner />; 
 
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;

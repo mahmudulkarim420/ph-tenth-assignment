@@ -6,12 +6,13 @@ import Spinner from "../Components/Spinner";
 const AllBooks = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [sortOrder, setSortOrder] = useState("desc"); // desc = high to low
+  const [sortOrder, setSortOrder] = useState("desc"); 
 
   useEffect(() => {
     axios
       .get("https://books-haven-prem-server-kappa.vercel.app/books")
       .then((res) => {
+        console.log(res)
         setBooks(res.data);
         setLoading(false);
       })
@@ -26,7 +27,7 @@ const AllBooks = () => {
       sortOrder === "desc" ? b.rating - a.rating : a.rating - b.rating
     );
     setBooks(sortedBooks);
-    setSortOrder(sortOrder === "desc" ? "asc" : "desc"); // toggle order
+    setSortOrder(sortOrder === "desc" ? "asc" : "desc"); 
   };
 
   if (loading) {
