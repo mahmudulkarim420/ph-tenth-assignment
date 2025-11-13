@@ -4,7 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const UpdateBook = () => {
-  const { id } = useParams(); // MyBooks থেকে path parameter
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -20,13 +20,17 @@ const UpdateBook = () => {
 
   // Fetch current book data
   useEffect(() => {
-    axios
-      .get(`https://books-haven-prem-server-kappa.vercel.app/books/${id}`)
-      .then((res) => setFormData(res.data))
-      .catch((err) => {
-        console.error(err);
+    const fetchBook = async () => {
+      try {
+        const res = await axios.get(`https://books-haven-prem-server-kappa.vercel.app/books/${id}`);
+        const { _id, ...bookData } = res.data; // Remove _id to prevent MongoDB update issue
+        setFormData(bookData);
+      } catch (err) {
+        console.error("Fetch book error:", err);
         toast.error("Failed to fetch book info");
-      });
+      }
+    };
+    fetchBook();
   }, [id]);
 
   const handleChange = (e) => {
@@ -37,15 +41,17 @@ const UpdateBook = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      const { _id, ...dataToUpdate } = formData; // just in case
       await axios.put(`https://books-haven-prem-server-kappa.vercel.app/books/${id}`, {
-        ...formData,
+        ...dataToUpdate,
         rating: Number(formData.rating),
       });
       toast.success("Book updated successfully!");
-      navigate("/"); // Update হলে MyBooks page এ redirect
+      navigate("/my-books"); // MyBooks page এ redirect
     } catch (err) {
-      console.error(err);
-      toast.error("Failed to update book");
+      console.error("Update book error:", err);
+      const errorMessage = err.response?.data?.message || "Failed to update book";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

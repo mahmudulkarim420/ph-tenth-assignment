@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { AuthContext } from "../Providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import React, { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
+import { AuthContext } from '../Providers/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const MyBooks = () => {
   const { user } = useContext(AuthContext);
@@ -19,7 +19,7 @@ const MyBooks = () => {
       setBooks(res.data);
     } catch (err) {
       console.error(err);
-      toast.error("Failed to fetch your books!");
+      toast.error('Failed to fetch your books!');
     }
   };
 
@@ -33,11 +33,11 @@ const MyBooks = () => {
       await axios.delete(
         `https://books-haven-prem-server-kappa.vercel.app/books/${id}`
       );
-      toast.success("Book deleted!");
+      toast.success('Book deleted!');
       setBooks(books.filter((book) => book._id !== id));
     } catch (err) {
       console.error(err);
-      toast.error("Failed to delete book!");
+      toast.error('Failed to delete book!');
     }
   };
 
