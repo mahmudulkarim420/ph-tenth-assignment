@@ -2,17 +2,21 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import Spinner from '../Components/Spinner';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Layouts = () => {
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'default');
+  const location = useLocation();
 
+  // Spinner Loading Effect
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+    const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
+  // Theme Control
   useEffect(() => {
     const body = document.body;
 
@@ -21,10 +25,12 @@ const Layouts = () => {
       body.style.color = '#ffffff';
     } else if (theme === 'light') {
       body.style.background = '#ffffff';
-      body.style.color = '#000000'; // সব text black হবে
+      body.style.color = '#000000';
     } else {
-      body.style.background = 'linear-gradient(to right, #1A2A6C, #B21F1F, #FDBB2D)';
-      body.style.color = '#ffffff'; // default mode সব text white
+      body.style.background = 'linear-gradient(120deg, #1A2A6C, #B21F1F, #FDBB2D)';
+      body.style.backgroundSize = '400% 400%';
+      body.style.animation = 'gradientMove 15s ease infinite';
+      body.style.color = '#ffffff';
     }
 
     localStorage.setItem('theme', theme);
@@ -33,13 +39,26 @@ const Layouts = () => {
   if (loading) return <Spinner />;
 
   return (
-    <div className={`min-h-screen flex flex-col transition-colors duration-300
+    <div
+      className={`min-h-screen flex flex-col transition-colors duration-300 overflow-hidden
       ${theme === 'dark' ? 'text-white' : theme === 'light' ? 'text-black' : 'text-white'}`}
     >
       <Navbar theme={theme} setTheme={setTheme} />
-      <main className="flex-1">
-        <Outlet />
-      </main>
+
+      {/* Page Transition Animation */}
+      <AnimatePresence mode="wait">
+        <motion.main
+          key={location.pathname}
+          initial={{ opacity: 0, y: 40, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -30, scale: 0.98 }}
+          transition={{ duration: 0.6, ease: 'easeInOut' }}
+          className="flex-1"
+        >
+          <Outlet />
+        </motion.main>
+      </AnimatePresence>
+
       <Footer theme={theme} />
     </div>
   );
